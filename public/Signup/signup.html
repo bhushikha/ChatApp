@@ -11,31 +11,22 @@
 
 <body>
     <div class="container">
-
         <form class="signup" id="signup" onsubmit="signup(event)">
-            <h1 class="signuptitle">Signup</h2><br>
-                <label for="name">Name</label>
-                <input id="name" type="text" name="name" required><br>
-                <label for="email">Email</label>
-                <input id="email" type="text" name="email" required><br>
-
-                <label for="number">Phone Number</label>
-                <input id="number" type="tel" name="number" required><br>
-                
-
-                <label for="password">Password</label>
-                <input id="password" type="text" name="password" required><br>
-                <input id="password" type="password" name="password" required><br>
-
-                <button class="submitbtn">Sign Up</button><br>
-                <a class="have_account" href="">Login If already a User</a>
-
+            <h1 class="signuptitle">Signup</h1><br>
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" required><br>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required><br>
+            <label for="phonenumber">Phone Number</label>
+            <input id="phonenumber" type="tel" name="phonenumber" required><br>
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required><br>
+            <button class="submitbtn">Sign Up</button><br>
+            <a class="have_account" href="">Login If already a User</a>
         </form>
-
     </div>
     <script src="./signup.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.2.0/axios.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-const url = 'http://localhost'
+const url = 'http://localhost:3000';
 
 async function signup(e) {
     try {
@@ -9,18 +9,20 @@ async function signup(e) {
             phonenumber: e.target.phonenumber.value,
             password: e.target.password.value
         }
-        // console.log(signupDetails.email);
 
-        const respone = await axios.post(`${url}:3000/user/signup`, signupDetails)
-        console.log(respone.succes);
-        if (respone.succes) {
+        const response = await axios.post(`${url}/user/signup`, signupDetails);
+
+        console.log(response);
+
+        if (response.data.success) {
+            alert("Successfully signed up");
             window.location.href = "../Login/login.html";
+        } else {
+            const errorMessage = response.data.message || 'An error occurred during signup.';
+            alert(errorMessage);
         }
-        else {
-            throw new Error(respone.message)
-        }
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
+        alert('An error occurred during signup.');
     }
 }

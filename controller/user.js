@@ -13,11 +13,13 @@ function isstringinvalid(string) {
 const signup = async (req, res) => {
     try {
         const { name, email, phonenumber, password } = req.body;
-        // console.log(name)
+        console.log(req.body);
 
         if (isstringinvalid(name) || isstringinvalid(email) || isstringinvalid(phonenumber) || isstringinvalid(password)) {
             return res.status(400).json({ err: "Bad parameters. Something is missing" });
         }
+        
+
 
         const result = await User.findAll({ where: { email } })
         if (result.length > 0) {
