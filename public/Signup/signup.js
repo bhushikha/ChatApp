@@ -14,11 +14,11 @@ async function signup(e) {
 
         console.log(response);
 
-        if (response.data.success) {
+        if (response && response.data && response.data.success) {
             alert("Successfully signed up");
             window.location.href = "../Login/login.html";
         } else {
-            const errorMessage = response.data.message || 'An error occurred during signup.';
+            const errorMessage = (response && response.data && response.data.message) || 'An error occurred during signup.';
             alert(errorMessage);
         }
     } catch (error) {
