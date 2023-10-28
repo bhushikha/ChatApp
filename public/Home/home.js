@@ -3,21 +3,23 @@ const token = localStorage.getItem('token');
 const name = localStorage.getItem('name');
 const email = localStorage.getItem('email');
 // console.log(name, email);
-
-
 const addMsgBtn = document.getElementById('addmsgbtn');
 const messageInput = document.getElementById('messageinput');
 
 window.addEventListener('DOMContentLoaded', async () => {
     getMessages();
+    // getMessages();
+    setInterval(() => {
+        getMessages();
+    }, 1000);
 })
+
 
 addMsgBtn.addEventListener('click', async () => {
     try {
         let msg = messageInput.value
         // console.log(messageInput.value)
         messageInput.value = "";
-        const response = await axios.post(`${url}:3000/message/addMessage`, { msg: msg }, { headers: { "Authorization": token } });
         await axios.post(`${url}:3000/message/addMessage`, { msg: msg }, { headers: { "Authorization": token } });
         alert('Message sent successfully');
     }
@@ -25,14 +27,13 @@ addMsgBtn.addEventListener('click', async () => {
         alert(error);
     }
 })
-
-
 async function getMessages() {
     try {
         const response = await axios.get(`${url}:3000/message/getMessage`, { headers: { "Authorization": token } });
         console.log(response.data);
         const data = response.data;
-        let messages = document.getElementById("messages_cont_ul")
+        let messages = document.getElementById("messages_cont_ul");
+        messages.innerHTML = '';
         for (i = 0; i < response.data.length; i++) {
             messages.innerHTML = messages.innerHTML + ` <li class="even"><strong>${data[i].username} :</strong> ${data[i].msg} </li>`;
         }
@@ -42,4 +43,4 @@ async function getMessages() {
     }
 
 
-}
+} 
