@@ -6,16 +6,17 @@ async function login(e) {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        // console.log(loginDetails);
-
         const respone = await axios.post(`${url}:3000/user/login`, loginDetails);
         // console.log(respone.token);
         localStorage.setItem('token', respone.token)
+        // console.log(respone.name);
+        localStorage.setItem('token', respone.token);
+        localStorage.setItem('name', respone.name);
+        localStorage.setItem('email', respone.email);
         alert(respone.message);
+        window.location.href = '../Home/home.html';
     }
     catch (err) {
-        // console.log(JSON.stringify(err))
-        document.body.innerHTML += `<div style="color:red;">${err.message}<div>`;
         alert(err.message);
     }
 }
