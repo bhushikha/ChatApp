@@ -1,29 +1,30 @@
-const url = 'http://localhost:3000';
-
-async function signup(event) {
+const url = 'http://localhost'
+async function signup(e) {
     try {
-        event.preventDefault();
+        e.preventDefault();
         const signupDetails = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phonenumber: document.getElementById('phonenumber').value,
-            password: document.getElementById('password').value
+            name: e.target.name.value,
+            email: e.target.email.value,
+            phonenumber: e.target.phonenumber.value,
+            password: e.target.password.value
         }
-
-        const response = await axios.post(`${url}/user/signup`, signupDetails);
-
-        if (response.status >= 200 && response.status < 300) {
-            alert("Successfully signed up");
+        // console.log(signupDetails.email);
+        const respone = await axios.post(`${url}:3000/user/signup`, signupDetails)
+        // console.log(respone.succes);
+        if (respone.succes) {
+            e.target.name.value = '';
+            e.target.email.value = '';
+            e.target.phonenumber.value = '';
+            e.target.password.value = '';
+            alert("Successfuly signed up");
             window.location.href = "../Login/login.html";
-        } else {
-            const errorMessage = (response.data && response.data.message) || 'An error occurred during signup.';
-            alert(errorMessage);
         }
-    } catch (error) {
-        console.log(error);
-        alert('An error occurred during signup.');
+        else {
+            throw new Error(respone.message);
+        }
+    }
+    catch (error) {
+        alert(error);
+        alert("Email already exists");
     }
 }
-
-// Add an event listener to the form
-document.getElementById('signup-form').addEventListener('submit', signup);

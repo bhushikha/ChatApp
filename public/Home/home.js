@@ -15,20 +15,24 @@ const messageInput = document.getElementById('messageinput');
 
 window.addEventListener('DOMContentLoaded', async () => {
     try {
-        const msg = await localStorage.getItem('totalMsgs');
-        const nam = await localStorage.getItem('name');
-        let msg1 = msg.split(',');
-        let nam1 = nam.split(',')
-        await displayMsg(nam1, msg1);
-        
-        getMessages();
-        
+        const msg = localStorage.getItem('totalMsgs');
+        const nam = localStorage.getItem('name');
 
+        if (msg && nam) {
+            let msg1 = msg.split(',');
+            let nam1 = nam.split(',');
+            await displayMsg(nam1, msg1);
+        } else {
+            // Handle the case when 'totalMsgs' or 'name' is not in localStorage
+            console.log('totalMsgs or name not found in localStorage');
+        }
+
+        getMessages();
+    } catch (error) {
+        console.log(error);
     }
-    catch (error) {
-        console.log(error)
-    }
-})
+});
+
 
 const btn = document.getElementById('addmsgbtn');
 btn.addEventListener('click', () => {

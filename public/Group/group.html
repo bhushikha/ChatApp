@@ -13,13 +13,12 @@
     <header>
         <h1>Group Chat App</h1>
     </header>
-
     <section class="formgroup">
         <h2>Create Group</h2>
         <hr>
         <form onsubmit="creategroup(event)" id="formgroup">
             <label class="groupele"><strong>Group Name : </strong></label>
-            <input type="text" id="groupname" /><br><br>
+            <input type="text" id="groupname" required><br><br>
             <button type="submit" class="groupele" id="crtgrpbtn">
                 Create Group
             </button>
@@ -32,7 +31,6 @@
             <hr>
             <div id="mygroups"></div>
         </div><br>
-
         <div>
             <h2 id="smallheader">All Users</h2>
             <hr>
@@ -62,9 +60,7 @@
             </div>
             <hr>
 
-
     </aside>
-
     <script src="./group.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.2.0/axios.min.js"></script>
 </body>
