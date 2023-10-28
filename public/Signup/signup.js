@@ -1,24 +1,22 @@
 const url = 'http://localhost:3000';
 
-async function signup(e) {
+async function signup(event) {
     try {
-        e.preventDefault();
+        event.preventDefault();
         const signupDetails = {
-            name: e.target.name.value,
-            email: e.target.email.value,
-            phonenumber: e.target.phonenumber.value,
-            password: e.target.password.value
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phonenumber: document.getElementById('phonenumber').value,
+            password: document.getElementById('password').value
         }
 
         const response = await axios.post(`${url}/user/signup`, signupDetails);
 
-        console.log(response);
-
-        if (response && response.data && response.data.success) {
+        if (response.status >= 200 && response.status < 300) {
             alert("Successfully signed up");
             window.location.href = "../Login/login.html";
         } else {
-            const errorMessage = (response && response.data && response.data.message) || 'An error occurred during signup.';
+            const errorMessage = (response.data && response.data.message) || 'An error occurred during signup.';
             alert(errorMessage);
         }
     } catch (error) {
@@ -26,3 +24,6 @@ async function signup(e) {
         alert('An error occurred during signup.');
     }
 }
+
+// Add an event listener to the form
+document.getElementById('signup-form').addEventListener('submit', signup);
